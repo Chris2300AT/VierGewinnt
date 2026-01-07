@@ -3,6 +3,9 @@ package at.ac.hcw.viergewinnt;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
@@ -10,6 +13,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -34,6 +39,9 @@ public class MainController {
     private StackPane centerPane; // placeholder for center screen
 
     @FXML
+    private Button addButton;
+
+    @FXML
     public void initialize() {
         // Make search field stretch
         HBox.setHgrow(searchField, Priority.ALWAYS);
@@ -54,8 +62,48 @@ public class MainController {
             }
         });
 
+        addButtons();
+
         System.out.println("MainController initialized");
     }
+
+    public void addButtons (){
+        addButton.setOnAction(event -> {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/at/ac/hcw/viergewinnt/Buttons/addButton.fxml")
+            );
+            Parent root = null;
+            try {
+                root = loader.load();
+
+
+            Stage stage = new Stage();
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initOwner(addButton.getScene().getWindow());
+            stage.setTitle("Settings");
+
+
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+
+            // If you need data back:
+            AddButtonController controller = loader.getController();
+            String value = controller.addButtonReturnValue();
+
+
+            Stage mainStage = (Stage) addButton.getScene().getWindow();
+            boolean wasMaximized = mainStage.isMaximized();
+
+            if (wasMaximized) {
+                mainStage.setMaximized(true);
+            }
+
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+    }
+
 
     private void loadCenterScreen(String selectedCategory) {
         try {

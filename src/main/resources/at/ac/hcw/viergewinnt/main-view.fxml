@@ -14,7 +14,7 @@
 
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.StackPane?>
-<BorderPane xmlns:fx="http://javafx.com/fxml"
+    <BorderPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="at.ac.hcw.viergewinnt.MainController">
 
     <!-- TOP BAR -->
