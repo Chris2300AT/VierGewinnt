@@ -8,7 +8,7 @@
 
 <VBox spacing="10"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="at.ac.hcw.viergewinnt.AddButtonController">
+      fx:controller="at.ac.hcw.viergewinnt.AddButtonFolderController">
 
     <Label text="Change Stuff"/>
     <TextField fx:id="addButtonTextfield"/>

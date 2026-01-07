@@ -4,22 +4,22 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class AddButtonController {
+public class AddButtonFolderController {
     @FXML
     private TextField textField;
 
-    private String someValue;
+    private String path;
 
     @FXML
     private void handleSave() {
-        someValue = textField.getText();
+        path = textField.getText();
 
         // close the window
         Stage stage = (Stage) textField.getScene().getWindow();
         stage.close();
     }
 
-    public String addButtonReturnValue() {
-        return someValue;
+    public String returnPath() {
+        return path;
     }
 }

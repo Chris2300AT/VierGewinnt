@@ -5,8 +5,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -15,7 +15,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 
 public class MainController {
@@ -39,7 +38,7 @@ public class MainController {
     private StackPane centerPane; // placeholder for center screen
 
     @FXML
-    private Button addButton;
+    private MenuButton addMenu;
 
     @FXML
     public void initialize() {
@@ -62,46 +61,45 @@ public class MainController {
             }
         });
 
-        addButtons();
-
         System.out.println("MainController initialized");
     }
+    @FXML
+    private void folderAddButton(javafx.event.ActionEvent event) {
+        addButtonFolder();
+    }
 
-    public void addButtons (){
-        addButton.setOnAction(event -> {
-            FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/at/ac/hcw/viergewinnt/Buttons/addButton.fxml")
-            );
-            Parent root = null;
-            try {
-                root = loader.load();
+    @FXML
+    private void fileAddButton(javafx.event.ActionEvent event) {
+        addButtonFolder();
+    }
 
 
+
+    public void addButtonFolder (){
+        FXMLLoader loader = new FXMLLoader(
+                getClass().getResource("/at/ac/hcw/viergewinnt/Buttons/addButtonFolder.fxml")
+        );
+        Parent root = null;
+
+        try {
+            root = loader.load();
             Stage stage = new Stage();
             stage.initModality(Modality.WINDOW_MODAL);
-            stage.initOwner(addButton.getScene().getWindow());
+            stage.initOwner(addMenu.getScene().getWindow());
             stage.setTitle("Settings");
 
 
             stage.setScene(new Scene(root));
             stage.showAndWait();
 
+
             // If you need data back:
-            AddButtonController controller = loader.getController();
-            String value = controller.addButtonReturnValue();
+            AddButtonFolderController controller = loader.getController();
+            String returnPath = controller.returnPath();
 
-
-            Stage mainStage = (Stage) addButton.getScene().getWindow();
-            boolean wasMaximized = mainStage.isMaximized();
-
-            if (wasMaximized) {
-                mainStage.setMaximized(true);
-            }
-
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        });
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 
