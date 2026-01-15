@@ -43,8 +43,8 @@
                 </items>
             </MenuButton>
 
-            <Button fx:id="removeButton" text="Remove"/>
-            <Button fx:id="renameButton" text="Rename"/>
+            <Button fx:id="removeButton" text="Remove" onAction="#removeButtonClicked"/>
+            <Button fx:id="renameButton" text="Rename" onAction="#renameButtonClicked"/>
         </HBox>
     </top>
 

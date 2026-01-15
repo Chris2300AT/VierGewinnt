@@ -1,5 +1,6 @@
 package at.ac.hcw.viergewinnt;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -40,6 +41,8 @@ public class MainController {
     @FXML
     private MenuButton addMenu;
 
+    private String currentCategory;
+
     @FXML
     public void initialize() {
         // Make search field stretch
@@ -56,6 +59,7 @@ public class MainController {
         // Update center when selection changes
         categoryList.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             if (newVal != null) {
+                currentCategory = newVal;
                 // Removed welcomeText reference
                 loadCenterScreen(newVal); // reload center with new category
             }
@@ -139,6 +143,62 @@ public class MainController {
 
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void renameButtonClicked(ActionEvent actionEvent) {
+        FXMLLoader loader = new FXMLLoader(
+                getClass().getResource("/at/ac/hcw/viergewinnt/Buttons/renameButton.fxml")
+        );
+        Parent root = null;
+
+        try{
+            root = loader.load();
+            Stage stage = new Stage();
+            stage.initModality(Modality.WINDOW_MODAL);
+            //stage.initOwner(addMenu.getScene().getWindow());
+            stage.setTitle("Rename");
+
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+
+            RenameButtonController controller = loader.getController();
+            Boolean hasBeenRenamed = controller.hasBeenRenamed();
+
+            if (hasBeenRenamed){
+                loadCenterScreen(currentCategory);
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void removeButtonClicked(ActionEvent actionEvent) {
+        FXMLLoader loader = new FXMLLoader(
+                getClass().getResource("/at/ac/hcw/viergewinnt/Buttons/removeButton.fxml")
+        );
+        Parent root = null;
+
+        try{
+            root = loader.load();
+            Stage stage = new Stage();
+            stage.initModality(Modality.WINDOW_MODAL);
+            //stage.initOwner(addMenu.getScene().getWindow());
+            stage.setTitle("Remove");
+
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+
+            RemoveButtonController controller = loader.getController();
+            Boolean hasBeenRemoved = controller.hasBeenRemoved();
+
+            if (hasBeenRemoved){
+                loadCenterScreen(currentCategory);
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 }
