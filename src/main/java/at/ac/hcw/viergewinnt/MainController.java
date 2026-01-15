@@ -86,8 +86,7 @@ public class MainController {
             Stage stage = new Stage();
             stage.initModality(Modality.WINDOW_MODAL);
             stage.initOwner(addMenu.getScene().getWindow());
-            stage.setTitle("Settings");
-
+            stage.setTitle("Add Folder");
 
             stage.setScene(new Scene(root));
             stage.showAndWait();
