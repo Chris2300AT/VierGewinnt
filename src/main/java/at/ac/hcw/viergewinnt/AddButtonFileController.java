@@ -4,6 +4,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.io.File;
+
 public class AddButtonFileController {
     @FXML
     private TextField addButtonTextfield;
@@ -11,9 +13,21 @@ public class AddButtonFileController {
     private String path;
 
     @FXML
-    private void handleSave() {
-        path = addButtonTextfield.getText();
+    private TextField filePathField;
 
+    @FXML
+    private void initialize() {
+        filePathField.setOnMouseClicked(event -> openFileExplorerUtil());
+    }
+
+    private void openFileExplorerUtil() {
+
+        path = FileExplorerUtil.pickFilePath();
+        System.out.println("Path: " + path);
+    }
+
+    @FXML
+    private void handleSave() {
         // close the window
         Stage stage = (Stage) addButtonTextfield.getScene().getWindow();
         stage.close();
