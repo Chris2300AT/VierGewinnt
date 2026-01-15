@@ -65,17 +65,6 @@ public class MainController {
     }
     @FXML
     private void folderAddButton(javafx.event.ActionEvent event) {
-        addButtonFolder();
-    }
-
-    @FXML
-    private void fileAddButton(javafx.event.ActionEvent event) {
-        addButtonFolder();
-    }
-
-
-
-    public void addButtonFolder (){
         FXMLLoader loader = new FXMLLoader(
                 getClass().getResource("/at/ac/hcw/viergewinnt/Buttons/addButtonFolder.fxml")
         );
@@ -94,13 +83,43 @@ public class MainController {
 
             // If you need data back:
             AddButtonFolderController controller = loader.getController();
-            String returnPath = controller.returnPath();
+            String returnName = controller.returnName();
+
+            System.out.println("Return Name: " + returnName);
 
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
+    @FXML
+    private void fileAddButton(javafx.event.ActionEvent event) {
+        FXMLLoader loader = new FXMLLoader(
+                getClass().getResource("/at/ac/hcw/viergewinnt/Buttons/addButtonFile.fxml")
+        );
+        Parent root = null;
+
+        try {
+            root = loader.load();
+            Stage stage = new Stage();
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initOwner(addMenu.getScene().getWindow());
+            stage.setTitle("Add Folder");
+
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+
+
+            // If you need data back:
+            AddButtonFileController controller = loader.getController();
+            String returnPath = controller.returnPath();
+
+            System.out.println("Return Path: " + returnPath);
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     private void loadCenterScreen(String selectedCategory) {
         try {

@@ -6,20 +6,20 @@ import javafx.stage.Stage;
 
 public class AddButtonFolderController {
     @FXML
-    private TextField textField;
+    private TextField addButtonTextfield;
 
-    private String path;
+    private String name;
 
     @FXML
     private void handleSave() {
-        path = textField.getText();
+        name = addButtonTextfield.getText();
 
         // close the window
-        Stage stage = (Stage) textField.getScene().getWindow();
+        Stage stage = (Stage) addButtonTextfield.getScene().getWindow();
         stage.close();
     }
 
-    public String returnPath() {
-        return path;
+    public String returnName() {
+        return name;
     }
 }
