@@ -36,7 +36,7 @@
             <Region fx:id="topSpacer"/>
 
             <!-- Buttons -->
-            <MenuButton text="Options" fx:id="addMenu">
+            <MenuButton text="Add" fx:id="addMenu">
                 <items>
                     <MenuItem text="Folder" onAction="#folderAddButton"/>
                     <MenuItem text="File" onAction="#fileAddButton"/>
