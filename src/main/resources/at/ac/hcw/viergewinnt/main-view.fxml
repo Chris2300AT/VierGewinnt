@@ -12,51 +12,50 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
-<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="at.ac.hcw.viergewinnt.MainController">
 
-    <!-- TOP BAR -->
+<BorderPane fx:id="root" xmlns:fx="http://javafx.com/fxml" fx:controller="at.ac.hcw.viergewinnt.MainController">
+
     <top>
-        <HBox spacing="10.0" alignment="CENTER_LEFT">
+        <HBox fx:id="topBar" spacing="10.0" alignment="CENTER_LEFT">
             <padding>
                 <Insets top="10" bottom="10" left="10" right="10"/>
             </padding>
 
-            <!-- Logo -->
             <ImageView fx:id="logoImage" fitHeight="50" pickOnBounds="true" preserveRatio="true">
                 <image>
                     <Image url="@Logo.png"/>
                 </image>
             </ImageView>
 
-            <!-- Search field that stretches -->
-            <TextField fx:id="searchField" promptText="Search..." maxWidth="300"/>
+            <TextField fx:id="searchField" promptText="Search..." maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
 
-            <!-- Spacer to push buttons to right -->
-            <Region fx:id="topSpacer"/>
+            <Region fx:id="topSpacer" HBox.hgrow="ALWAYS"/>
 
-            <!-- Buttons -->
-            <MenuButton text="Add" fx:id="addMenu">
-                <items>
-                    <MenuItem text="Folder" onAction="#folderAddButton"/>
-                    <MenuItem text="File" onAction="#fileAddButton"/>
-                </items>
-            </MenuButton>
+            <HBox spacing="10.0" alignment="CENTER_RIGHT">
+                <MenuButton text="Add" fx:id="addMenu">
+                    <items>
+                        <MenuItem text="Folder" onAction="#folderAddButton"/>
+                        <MenuItem text="File" onAction="#fileAddButton"/>
+                    </items>
+                </MenuButton>
 
-            <Button fx:id="removeButton" text="Remove" onAction="#removeButtonClicked"/>
-            <Button fx:id="renameButton" text="Rename" onAction="#renameButtonClicked"/>
-            <Button fx:id="moveButton" text="Move" onAction="#moveButtonClicked"/>
+                <Button fx:id="removeButton" text="Remove" onAction="#removeButtonClicked"/>
+                <Button fx:id="renameButton" text="Rename" onAction="#renameButtonClicked"/>
+                <Button fx:id="moveButton" text="Move" onAction="#moveButtonClicked"/>
+            </HBox>
         </HBox>
     </top>
 
-
-    <!-- LEFT: category list -->
     <left>
-        <ListView fx:id="categoryList" minWidth="150"/>
+        <ListView fx:id="categoryList" minWidth="150" maxWidth="200"/>
     </left>
 
-    <!-- CENTER: main content -->
     <center>
-        <StackPane fx:id="centerPane"/>
+        <StackPane fx:id="centerPane">
+            <padding>
+                <Insets top="5" bottom="5" left="5" right="5"/>
+            </padding>
+        </StackPane>
     </center>
 
 </BorderPane>
