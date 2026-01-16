@@ -43,6 +43,8 @@ public class MainController {
 
     private String currentCategory;
 
+    private CenterController centerController;
+
     @FXML
     public void initialize() {
         // Make search field stretch
@@ -126,6 +128,10 @@ public class MainController {
         }
     }
 
+    public CenterController getCenterController() {
+        return centerController;
+    }
+
     private void loadCenterScreen(String selectedCategory) {
         try {
             FXMLLoader loader = new FXMLLoader(
@@ -136,6 +142,7 @@ public class MainController {
 
             // Pass the selected category to the center controller
             CenterController controller = loader.getController();
+            centerController = controller;
             controller.initData(selectedCategory);
 
             // Replace the center content

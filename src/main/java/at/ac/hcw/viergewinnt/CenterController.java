@@ -227,6 +227,7 @@ public class CenterController {
         } catch (IOException ignored) {
         }
     }
+
     public Path getCurrentlySelectedDirectoryPath() {
         if (fileTree == null || fileTree.getRoot() == null) return null;
 
