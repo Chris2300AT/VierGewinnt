@@ -42,7 +42,6 @@ public class RenameButtonController {
         }
     }
 
-
     @FXML
     private void handleRenameButton(){
         String newName = renameTextfield.getText();
