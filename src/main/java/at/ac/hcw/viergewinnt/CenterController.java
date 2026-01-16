@@ -82,6 +82,11 @@ public class CenterController {
         File startDir = rootPath.toFile();
         pathLabel.setText(startDir.getAbsolutePath());
 
+        //AppState Ordner wenn nichts ausgewählt -VH
+        AppState.setSelectedDirectory(startDir.toPath());
+
+
+
         TreeItem<File> rootItem = createNode(startDir);
         rootItem.setExpanded(true);
 
@@ -135,7 +140,12 @@ public class CenterController {
         // Pfad anzeigen mit fx:id="pathLabel" -VH
         fileTree.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             if (newVal != null && newVal.getValue() != null) {
-                pathLabel.setText(newVal.getValue().getAbsolutePath());
+                File f = newVal.getValue();
+
+                pathLabel.setText(f.getAbsolutePath());
+                // Ordner an AppState senden -VH
+                Path dir = f.isFile() ? f.toPath().getParent() : f.toPath();
+                if (dir != null) AppState.setSelectedDirectory(dir);
             }
         });
     }
@@ -228,37 +238,6 @@ public class CenterController {
         }
     }
 
-    public Path getCurrentlySelectedDirectoryPath() {
-        if (fileTree == null || fileTree.getRoot() == null) return null;
-
-        File selected = null;
-
-        var selectedItem = fileTree.getSelectionModel().getSelectedItem();
-        if (selectedItem != null) {
-            selected = selectedItem.getValue();
-        }
-
-        // Nichts ausgewählt -> root -VH
-        if (selected == null) {
-            selected = fileTree.getRoot().getValue();
-        }
-        if (selected == null) return null;
-
-        // Wenn Datei ausgewählt -> Ordner in dem das File liegt -VH
-        if (selected.isFile()) {
-            File parent = selected.getParentFile();
-            return parent != null ? parent.toPath() : null;
-        }
-
-        // Wenn Ordner ausgewählt -> Ordner -VH
-        return selected.toPath();
-    }
-
-    // String wenn das Chris so lieber ist -VH
-    public String getCurrentlySelectedDirectoryPathString() {
-        Path p = getCurrentlySelectedDirectoryPath();
-        return p != null ? p.toAbsolutePath().toString() : null;
-    }
     private TreeItem<File> createNode(final File f) {
         return new TreeItem<>(f) {
             private boolean isLeaf;
