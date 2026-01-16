@@ -201,4 +201,31 @@ public class MainController {
             throw new RuntimeException(e);
         }
     }
+    public void moveButtonClicked(ActionEvent actionEvent) {
+        FXMLLoader loader = new FXMLLoader(
+                getClass().getResource("/at/ac/hcw/viergewinnt/Buttons/moveButton.fxml")
+        );
+        Parent root = null;
+
+        try{
+            root = loader.load();
+            Stage stage = new Stage();
+            stage.initModality(Modality.WINDOW_MODAL);
+            //stage.initOwner(addMenu.getScene().getWindow());
+            stage.setTitle("Move");
+
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+
+            MoveButtonController controller = loader.getController();
+            Boolean hasBeenMoved = controller.hasBeenMoved();
+
+            if (hasBeenMoved){
+                loadCenterScreen(currentCategory);
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
