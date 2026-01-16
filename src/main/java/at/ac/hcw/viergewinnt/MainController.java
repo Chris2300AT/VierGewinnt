@@ -118,13 +118,12 @@ public class MainController {
             stage.setScene(new Scene(root));
             stage.showAndWait();
 
-
-            // If you need data back:
             AddButtonFileController controller = loader.getController();
-            String returnPath = controller.returnPath();
+            Boolean hasBeenCreated = controller.getHasBeenCreated();
 
-
-            System.out.println("Return Path: " + returnPath);
+            if (hasBeenCreated){
+                loadCenterScreen(currentCategory);
+            }
 
         } catch (IOException e) {
             throw new RuntimeException(e);

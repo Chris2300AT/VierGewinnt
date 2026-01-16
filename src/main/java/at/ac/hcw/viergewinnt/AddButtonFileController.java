@@ -5,8 +5,11 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import at.ac.hcw.viergewinnt.AppState;
 
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
-
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 
 public class AddButtonFileController {
     @FXML
@@ -16,6 +19,8 @@ public class AddButtonFileController {
 
     @FXML
     private TextField filePathField;
+
+    private Boolean hasBeenCreated;
 
     @FXML
     private void initialize() {
@@ -30,14 +35,42 @@ public class AddButtonFileController {
         System.out.println("Path: " + path);
     }
 
+    private void copyFile() {
+        if (path == null || path.isEmpty()) {
+            System.out.println("No source file selected!");
+            return;
+        }
+
+        String newName = addButtonTextfield.getText();
+        Path selection = AppState.getSelectedDirectory();
+
+        Path sourcePath = Paths.get(path);
+
+        if (!newName.contains(".")) {
+            String originalName = sourcePath.getFileName().toString();
+            String extension = originalName.substring(originalName.lastIndexOf("."));
+            newName += extension;
+        }
+
+        Path destinationPath = selection.resolve(newName);
+
+        try {
+            Files.copy(sourcePath, destinationPath, StandardCopyOption.REPLACE_EXISTING);
+            System.out.println("Copied to: " + destinationPath);
+            hasBeenCreated = true;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     @FXML
     private void handleSave() {
-        // close the window
+        copyFile();
         Stage stage = (Stage) addButtonTextfield.getScene().getWindow();
         stage.close();
     }
 
-    public String returnPath() {
-        return path;
+    public Boolean getHasBeenCreated() {
+        return hasBeenCreated;
     }
 }
