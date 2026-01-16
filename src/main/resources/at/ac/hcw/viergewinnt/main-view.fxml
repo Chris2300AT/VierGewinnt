@@ -12,8 +12,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
-<BorderPane xmlns:fx="http://javafx.com/fxml"
-            fx:controller="at.ac.hcw.viergewinnt.MainController">
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="at.ac.hcw.viergewinnt.MainController">
 
     <!-- TOP BAR -->
     <top>
@@ -45,6 +44,7 @@
 
             <Button fx:id="removeButton" text="Remove" onAction="#removeButtonClicked"/>
             <Button fx:id="renameButton" text="Rename" onAction="#renameButtonClicked"/>
+            <Button fx:id="moveButton" text="Move" onAction="#moveButtonClicked"/>
         </HBox>
     </top>
 
