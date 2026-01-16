@@ -88,6 +88,11 @@ public class MainController {
             // If you need data back:
             AddButtonFolderController controller = loader.getController();
             String returnName = controller.returnName();
+            Boolean hasBeenCreated = controller.hasBeenCreated();
+
+            if (hasBeenCreated){
+                loadCenterScreen(currentCategory);
+            }
 
             System.out.println("Return Name: " + returnName);
 
@@ -108,7 +113,7 @@ public class MainController {
             Stage stage = new Stage();
             stage.initModality(Modality.WINDOW_MODAL);
             stage.initOwner(addMenu.getScene().getWindow());
-            stage.setTitle("Add Folder");
+            stage.setTitle("Add File");
 
             stage.setScene(new Scene(root));
             stage.showAndWait();

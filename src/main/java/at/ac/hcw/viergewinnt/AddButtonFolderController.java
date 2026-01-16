@@ -3,10 +3,8 @@ package at.ac.hcw.viergewinnt;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import at.ac.hcw.viergewinnt.AppState;
 
 import java.io.IOException;
-import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
@@ -16,6 +14,8 @@ public class AddButtonFolderController {
 
     private String name;
 
+    private boolean created;
+
     @FXML
     private void handleSave() {
         name = addButtonTextfield.getText();
@@ -24,6 +24,10 @@ public class AddButtonFolderController {
         // close the window
         Stage stage = (Stage) addButtonTextfield.getScene().getWindow();
         stage.close();
+    }
+
+    public boolean hasBeenCreated() {
+        return created;
     }
 
     public void createNewFolder(String folderName) {
@@ -46,6 +50,7 @@ public class AddButtonFolderController {
 
         try {
             Files.createDirectory(newFolderPath);
+            created = true;
             System.out.println("Folder created at: " + newFolderPath);
 
             // Refresh your UI here

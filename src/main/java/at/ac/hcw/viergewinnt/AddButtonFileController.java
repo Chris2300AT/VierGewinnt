@@ -22,7 +22,6 @@ public class AddButtonFileController {
         filePathField.setOnMouseClicked(event -> openFileExplorerUtil());
     }
 
-
     Path dir = AppState.getSelectedDirectory();
 
     private void openFileExplorerUtil() {
