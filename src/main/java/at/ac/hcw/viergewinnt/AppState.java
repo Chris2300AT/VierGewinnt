@@ -6,6 +6,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import java.nio.file.Path;
 
 public final class AppState {
+
     private static final ObjectProperty<Path> selectedDirectory =
             new SimpleObjectProperty<>(MainApplication.BASE_DIR);
 
