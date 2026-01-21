@@ -21,7 +21,7 @@
         <TreeTableView fx:id="fileTree">
             <columns>
                 <TreeTableColumn fx:id="colName" text="Name" prefWidth="320"/>
-                <TreeTableColumn fx:id="colTimes" text="Times-Played" prefWidth="120"/>
+                <TreeTableColumn fx:id="colTimes" text="Times Viewed" prefWidth="120"/>
                 <TreeTableColumn fx:id="colDate" text="Änderungsdatum" prefWidth="200"/>
             </columns>
         </TreeTableView>
